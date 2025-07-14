@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kids Shopping Store</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #fff;
+      --card: #2a2a2a;
+      --header: #1f1f1f;
+      --button: #03dac6;
+    }
+
+    body.light {
+      --bg: #f0f0f0;
+      --text: #000;
+      --card: #fff;
+      --header: #ffffff;
+      --button: #00796b;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      transition: 0.3s;
+    }
+    header {
+      background-color: var(--header);
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+    }
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--button);
+      color: var(--text);
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      background: var(--card);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .product button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: var(--button);
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      color: #000;
+    }
+    .cart, .credit, .login, .checkout {
+      background-color: var(--header);
+      padding: 20px;
+      margin: 20px;
+      border-radius: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🛒 Kids Shopping Store</header>
+  <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+  <div class="login">
+    <h2>Login</h2>
+    <input type="text" placeholder="Username" id="username" />
+    <input type="password" placeholder="Password" id="password" />
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div class="container">
+    <!-- Products with real images -->
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1600180758890-18294d505b1b" alt="T-Shirt" />
+      <h3>Cool T-Shirt</h3>
+      <p>$15</p>
+      <button onclick="addToCart('Cool T-Shirt', 15)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0648" alt="Pants" />
+      <h3>Stylish Pants</h3>
+      <p>$20</p>
+      <button onclick="addToCart('Stylish Pants', 20)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1585784060125-b01a0f27b7ea" alt="Shoes" />
+      <h3>Kids Shoes</h3>
+      <p>$30</p>
+      <button onclick="addToCart('Kids Shoes', 30)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772" alt="Backpack" />
+      <h3>Backpack</h3>
+      <p>$25</p>
+      <button onclick="addToCart('Backpack', 25)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <ul id="cartList"></ul>
+    <p><strong>Total:</strong> $<span id="totalPrice">0</span></p>
+  </div>
+
+  <div class="checkout">
+    <h2>Checkout</h2>
+    <input type="text" placeholder="Full Name" />
+    <input type="text" placeholder="Delivery Address" />
+    <input type="text" placeholder="Phone Number" />
+    <button onclick="alert('Order placed!')">Place Order</button>
+  </div>
+
+  <div class="credit">
+    <h2>Credit Card Info</h2>
+    <input type="text" placeholder="Card Number (XXXX-XXXX-XXXX-XXXX)" />
+    <input type="text" placeholder="Name on Card" />
+    <input type="text" placeholder="Expiry Date (MM/YY)" />
+    <input type="text" placeholder="CVV" />
+  </div>
+
+  <script>
+    let total = 0;
+    function addToCart(item, price) {
+      const cartList = document.getElementById("cartList");
+      const li = document.createElement("li");
+      li.textContent = `${item} - $${price}`;
+      cartList.appendChild(li);
+      total += price;
+      document.getElementById("totalPrice").innerText = total;
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user === "admin" && pass === "1234") {
+        alert("Login successful!");
+      } else {
+        alert("Invalid login. Use admin/1234");
+      }
+    }
+  </script>
+
+</body>
+</html>
